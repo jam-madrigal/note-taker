@@ -4,7 +4,6 @@ const fs = require("fs");
 const path = require("path");
 const express = require("express");
 
-
 const PORT = 8080;
 
 const server = http.createServer(handleRequest);
@@ -39,7 +38,7 @@ function renderNotesPage(req, res) {
   }
 
 function renderHomePage(req, res) {
-    const homePath = path.join(__dirname, "../../index.html");
+    const homePath = path.join(__dirname "../../index.html");
 
     fs.readFile(homePath, function(err, data) {
       if (err) {
