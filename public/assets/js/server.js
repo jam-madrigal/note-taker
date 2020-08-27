@@ -31,14 +31,14 @@ function renderNotesPage(req, res) {
       else {
         // We then respond to the client with the HTML page by specifically telling the browser that we are delivering
         // an html file.
-        res.writeHead(200, { "Content-Type": "text/html" });
+        res.writeHead(200, { "Content-Type": "text/html"});
         res.end(data);
       }
     });
   }
 
 function renderHomePage(req, res) {
-    const homePath = path.join(__dirname "../../index.html");
+    const homePath = path.join(__dirname, "../../index.html");
 
     fs.readFile(homePath, function(err, data) {
       if (err) {
