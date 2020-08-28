@@ -1,5 +1,4 @@
 // Establishing a route to the db.json file required for the note data, making an array to store respones to write to the db
-const reqArray = [];
 const fs = require("fs");
 const path = require("path");
 const notesData = require(path.join(__dirname, '../db/db.json'));
@@ -16,21 +15,16 @@ module.exports = function(app) {
     console.log(req.body);
     // If there is any data in newNote in the handleNoteSave function, push it into the request array, then write to db.json
       const note = req.body;
-      // Clearing the array, then pushing the existing notes first so they are included in the new writeFile output and not deleted
-      reqArray.push(notesData);
-      reqArray.push(note);
-      // Assigning an id to each object in the array, incrementally based on their index
-      reqArray.forEach((arrayNote, index) => {
-        arrayNote.id = index;
-      });
+      // Assigning the notes a random id from 1-1000 and pushing it to the db.json
+      note.id = Math.ceil(Math.random() * 1000);
+      res.json(note);
+      notesData.push(note);
 
       // Writing the file
       fs.writeFileSync(
         path.join(__dirname, '../db/db.json'),
-        JSON.stringify({ notes: reqArray }, null, 2)
-    );
-      // Returning the new note to the client
-      res.json(note);
+        JSON.stringify(notesData), null, 2)
+
     }
   );
 };
