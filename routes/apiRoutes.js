@@ -1,5 +1,6 @@
 // Establishing a route to the db.json file required for the note data
 const notesData = require("../db/db");
+const fs = require('fs'); 
 
 // Handling what to do when receiving API requests
 module.exports = function(app) {
@@ -13,11 +14,5 @@ module.exports = function(app) {
     console.log(req);
     // If there is any data in newNote in the handleNoteSave function, push it to the db files
     if (req.body.length > 0) {
-      notesData.push(req.body);
-    }
-    else {
-        return
-      }
-  });
 
 };
