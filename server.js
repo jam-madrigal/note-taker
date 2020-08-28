@@ -13,9 +13,12 @@ const PORT = process.env.PORT || 8080;
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+// Ensuring static files, like the js and css, can be used
+app.use(express.static('public'));
 
 //Setting up the location of the routes to be used
 require("./routes/htmlRoutes")(app);
+require("./routes/apiRoutes")(app);
 
 // =============================================================================
 // LISTENER
