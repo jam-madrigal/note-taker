@@ -20,11 +20,7 @@ app.use(express.static('public'));
 require("./routes/htmlRoutes")(app);
 require("./routes/apiRoutes")(app);
 
-// =============================================================================
-// LISTENER
-// The below code effectively "starts" our server
-// =============================================================================
-
+// Starting the server
 app.listen(PORT, function() {
   console.log("App listening on PORT: " + PORT);
 });
