@@ -32,13 +32,13 @@ module.exports = function(app) {
   // Create an app.delete, each note should have a unique url and this function will loop through the information from db.json to find the corresponding note for that url/id, remove it, then rewrite the db.json file
   app.delete("/api/notes/:id", (req, res) => {
     // Defining the part of the request that we will use as the id to identify the array index in the db.json
-    let searchID = req.params.id;
+    let searchID = parseInt(req.params.id);
 
     // A function that loops through db.json, finds the index that contains an ID matching the request, splices it out, and rewrites the db.json without that index
 
     function findID() {
       for (let i = 0; i < notesData.length; i++) {
-        if (notesData[i].id == searchID) {
+        if (notesData[i].id === searchID) {
           notesData.splice(i, 1);
 
           // Re-writing the db.json file with the newly spliced db.json
