@@ -12,13 +12,13 @@ module.exports = function(app) {
 
   // API POST Requests
   app.post("/api/notes", function(req, res) {
-    console.log(req.body);
     // If there is any data in newNote in the handleNoteSave function, push it into the request array, then write to db.json
       const note = req.body;
       // Assigning the notes a random id from 1-1000 and pushing it to the db.json
       note.id = Math.ceil(Math.random() * 1000);
-      res.json(note);
       notesData.push(note);
+      // return the current note, find out why this is not working and rendering notes on the page
+      res.json(note);
 
       // Writing the file
       fs.writeFileSync(
