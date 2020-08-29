@@ -18,7 +18,7 @@ This is a web application that can be used to take notes.
 ![Demo Video](https://github.com/jam-madrigal/note-taker/blob/master/public/assets/notetakingexample.gif?raw=true)
 
 # Installation
-To install this application, clone the repository, run npm install in the directory of the clone, and run "server.js" through command line while in the same directory. The application will then be hosted locally on port 8080. Visit localhost:8080 or 127.0.0.1:8080 in your browser.
+To install this application, clone the repository, run npm install in the directory of the clone, and run "node server.js" through command line while in the same directory. The application will then be hosted locally on port 8080. Visit localhost:8080 or 127.0.0.1:8080 in your browser.
 
 # Usage
 Use this application to take notes, save them, and delete any old notes.
