@@ -15,7 +15,8 @@ module.exports = function(app) {
     // Define where the object containing the note is in the request
       const note = req.body;
       // Assigning the note object a random id from 1-1000 and pushing it to the db.json, which is an array of objects
-      // ***Figure out how to ensure no new note receives an existing id # in future versions***
+      // ***Figure out how to ensure no new note receives an existing id # in future versions***, maybe use a for loop to go through the db.json, and if note.id === an existing notesData[i].id, run the randomizer again until it hits a free one, and if there are 1000 notes already, return an indication to the user to delete some notes. Could increase the random number range to make it get stuck doing this minimally, and cap the user at an amount of notes far lower than the randomizer, perhaps by if notesData.length > ~100 it returns an error and prompts to delete notes.
+
       note.id = Math.ceil(Math.random() * 1000);
       notesData.push(note);
       // return the current note
@@ -31,7 +32,31 @@ module.exports = function(app) {
   // Create an app.delete, each note should have a unique url and this function will loop through the information from db.json to find the corresponding note for that url/id, remove it, then rewrite the db.json file
   app.delete("/api/notes/:id", (req, res) => {
     console.log("Delete request from the user.");
+    console.log(req.params);
+    // Defining the part of the request that we will use as the id to identify the array index in the db.json
+    let searchID = req.params.id;
 
+    // A function that loops through db.json, finds the index that contains an ID matching the request, splices it out, and rewrites the db.json without that index
+    function findID() {
+      console.log("The function works!");
+      for (var i = 0; i < notesData.length; i++) {
+        console.log(notesData[i]);
+        if (notesData[i].id == searchID) {
+          console.log("ID search is working!")
+          notesData.splice(i, 1);
+          console.log(notesData);
+          // Re-writing the db.json file with the newly spliced db.json
+           fs.writeFileSync(
+            path.join(__dirname, '../db/db.json'),
+            JSON.stringify(notesData), null, 2)
+            // Sending the newly spliced and written db.json to the client
+            res.json(notesData);
+
+            // Yay I figured it out. Thanks askBCS for giving me lots of techniques to figure this out on my own piece by piece after helping me with the other two api request. This DELETE method was a lot of fun to figure out as a result. I console logged each part of this to make sure the parts of my code were actually being incrementally reached when the request was made.
+        }
+      }  
+    }
+    findID();
   });
 
 };
