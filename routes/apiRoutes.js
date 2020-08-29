@@ -37,8 +37,8 @@ module.exports = function(app) {
     // A function that loops through db.json, finds the index that contains an ID matching the request, splices it out, and rewrites the db.json without that index
 
     function findID() {
-      for (var i = 0; i < notesData.length; i++) {
-        if (notesData[i].id == searchID) {
+      for (let i = 0; i < notesData.length; i++) {
+        if (notesData[i].id === searchID) {
           notesData.splice(i, 1);
 
           // Re-writing the db.json file with the newly spliced db.json
