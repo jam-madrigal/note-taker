@@ -38,7 +38,7 @@ module.exports = function(app) {
 
     function findID() {
       for (let i = 0; i < notesData.length; i++) {
-        if (notesData[i].id === searchID) {
+        if (notesData[i].id == searchID) {
           notesData.splice(i, 1);
 
           // Re-writing the db.json file with the newly spliced db.json
